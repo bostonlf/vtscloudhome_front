@@ -17,7 +17,7 @@
       <button v-on:click="getLoginUser">mytestbutton123</button>
     </p>
     <p>
-      <button v-on:click="testnewAJAX">testnewAJAXx</button>
+      <button v-on:click="testnewAJAX">testnewAJAX</button>
     </p>
 
 {{currentUser}}
