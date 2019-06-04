@@ -125,7 +125,7 @@ export default {
     },
     AddNewUser: function() {
       alert("AddNewUser");
-      this.$http.post("/user").then(
+      this.$http.post("/getLoginUser").then(
         function(res) {
           console.log("请求successfully处理");
         },
@@ -136,7 +136,7 @@ export default {
     },
     DeleteUser: function() {
       alert("DeleteUser");
-      this.$http.delete("/user").then(
+      this.$http.delete("/getLoginUser").then(
         function(res) {
           console.log("请求successfully处理");
         },
@@ -147,7 +147,7 @@ export default {
     },
     UpdateUser: function() {
       alert("UpdateUser");
-      this.$http.put("/user").then(
+      this.$http.put("/getLoginUser").then(
         function(res) {
           console.log("请求successfully处理");
         },
@@ -158,7 +158,7 @@ export default {
     },
     SearchUsers: function() {
       alert("SearchUsers");
-      this.$http.get("/user").then(
+      this.$http.get("/getLoginUser").then(
         function(res) {
           console.log("请求successfully处理");
         },

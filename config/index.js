@@ -10,7 +10,16 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/im':{
+        target: 'https://localhost:3001/', // 你接口的域名
+        secure: false,    //如果是https接口，需要配置这个参数
+        changeOrigin: true,
+        pathRewrite: {
+          '^/im': '/'
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
