@@ -1,40 +1,63 @@
 <template>
   <article>
-      info@@{{info}}@@
-<table>
-<thead>
-<tr>
-<th></th>
-<th>User</th>
-<th>Role</th>
-<th>First Name</th>
-<th>Last Name</th>
-<th>Modified date</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-    <tr v-for="user in userRPTdata">
-      <td><input type="checkbox"></td>
-      <td>{{ user.User }}</td>
-      <td>{{ user.Role }}</td>
-      <td>{{ user.FirstName }}</td>
-      <td>{{ user.LastName }}</td>
-      <td>{{ user.ModifiedDate }}</td>
-      <td>{{ user.Status }}</td>
-    </tr>
-</tbody>
-  <tfoot>
-<tr>
-<td colspan="6"></td>
-</tr>
-  </tfoot>
-</table>
 
+<div v-if="userRPTdata.length>0">
+      <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>User</th>
+          <th>Role</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Modified date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in userRPTdata">
+          <td>
+            <input
+              type="checkbox"
+              v-model="selectedUser"
+              v-bind:value="user.checkboxValue"
+              v-bind:id="user.x_userid"
+            >
+          </td>
+          <td>{{ user.x_userid }}</td>
+          <td>{{ user.role }}</td>
+          <td>{{ user.x_firstname }}</td>
+          <td>{{ user.x_lastname }}</td>
+          <td>{{ user.x_modified }}</td>
+          <td>{{ user.Status }}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">
+            <button @click="SelectAll">Select all</button>
+          </td>
+          <td colspan="3">
+            <button @click="DeleteSelected">Delect selected user</button>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+</div>
+<div v-else>
+  No records.
+</div>
+
+
+
+
+
+    <hr>
   </article>
 </template>
 
 <script>
+import qs from "qs";
 // import axios from 'axios';
 // var root = '/im'
 // var root = 'http://172.16.188.107:8080/im'
@@ -43,64 +66,78 @@
 export default {
   data() {
     return {
-      userRPTdata: [
-        {
-          User: "&^sesese",
-          Role: "HR",
-          FirstName: "seses",
-          LastName: "esesese",
-          ModifiedDate: "2019/02/14",
-          Status: "Active"
-        },
-        {
-          User: "badgeitaly@cn.ibm.com",
-          Role: "Badge",
-          FirstName: "Badge",
-          LastName: "Italy",
-          ModifiedDate: "2019/02/13",
-          Status: "Inactive"
-        },
-        {
-          User: "1112wsetest2018@outlook.com",
-          Role: "HR",
-          FirstName: "1112WSETest2018@outlook.com",
-          LastName: "1112WSETest2018@outlook.com",
-          ModifiedDate: "2019/05/16",
-          Status: "Active"
-        },
-        {
-          User: "badge1114@cn.ibm.com",
-          Role: "Badge",
-          FirstName: "Badge",
-          LastName: "1114",
-          ModifiedDate: "2019/02/14",
-          Status: "Active"
-        },
-        {
-          User: "badgege@cn.ibm.com",
-          Role: "Badge",
-          FirstName: "BadgeGE@cn.ibm.com",
-          LastName: "BadgeGE@cn.ibm.com",
-          ModifiedDate: "2018/09/02",
-          Status: "Active"
-        }
-      ],
-      info:"info"
+      userRPTdata: [],
+      selectedUser: []
     };
   },
   name: "UserRPT",
   props: ["loginmsg"],
-  methods:{
-getuserRPT : function(params) {
+  methods: {
+    getuserRPT: function(params) {
+      this.$axios
+        .get("/im/API/searchUsers?country=cn&customer=IBM")
+        .then(response => {
+          if ("loginError" == response.data) {
+            //跳转到login
+            // https://localhost:3001/login
+            var id = 1;
+            this.$router.push({ name: "Pleaselogin", params: { userid: id } });
+          } else {
+            this.userRPTdata = response.data;
+            for (var i = 0; this.userRPTdata[i]; i++) {
+              var currentRPTuser = this.userRPTdata[i];
+              currentRPTuser.checkboxValue = this.generatecheckboxvaule(
+                currentRPTuser._id,
+                currentRPTuser._rev
+              );
+            }
+          }
+        })
+        .catch(function(error) {
+          // 请求失败处理
+          console.log(error);
+        });
+    },
+    SelectAll: function() {
+      if (this.selectedUser.length > 0) {
+        this.selectedUser = [];
+      } else {
+        this.selectedUser = [];
+        for (var i = 0; this.userRPTdata[i]; i++) {
+          this.selectedUser.push(this.userRPTdata[i]._id);
+        }
+      }
+    },
+    DeleteSelected: function() {
+      if (this.selectedUser.length == 0) {
+        alert("Please select one document at least.");
+      } else {
+          var that = this;
         this.$axios
-      .get('/im/API/searchUsers?country=cn&customer=IBM')
-      .then(response => (this.info = response))
-      .catch(function (error) { // 请求失败处理
-        console.log(error);
-      });
-}
+          .delete("/im/API/deleteSelectedUsers", {
+            //params参数必写 , 如果没有参数传{}也可以
+            params: {
+              id: 12345,
+              selectedUser: this.selectedUser
+            },
+            paramsSerializer: params => {
+              return qs.stringify(params, { indices: false });
+            }
+          })
+          .then(function(res) {
+            console.log(res);
+            that.getuserRPT();
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      }
+    },
+    generatecheckboxvaule: function(id, rev) {
+      return id + "@" + rev;
+    }
   },
-    mounted() {
+  mounted() {
     //自动加载indexs方法
     this.getuserRPT();
   }

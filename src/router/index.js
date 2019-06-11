@@ -6,6 +6,8 @@ import createNewUser from '@/components/createNewUser'
 import HelloWorld from '@/components/HelloWorld'
 import shoppingcart from '@/components/shoppingcart'
 import VTSbody from '@/components/VTSbody'
+import Pleaselogin from '@/components/Pleaselogin'
+import ExistingUser from '@/components/ExistingUser'
 
 Vue.use(Router)
 
@@ -30,9 +32,16 @@ export default new Router({
       path: '/route/createNewUser',
       name: 'createNewUser',
       component: createNewUser
+    },
+    {
+      path: '/route/ExistingUser/:newsId/:newsTitle',
+      name: 'ExistingUser',
+      component: ExistingUser
+    },
+    {
+      path: '/Pleaselogin',
+      name: 'Pleaselogin',
+      component: Pleaselogin
     }
-
-
-    
   ]
 })

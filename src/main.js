@@ -18,6 +18,7 @@ import VTSfooter from './components/VTSfooter.vue'
 Vue.config.productionTip = false
 Vue.use(VueResource);
 Vue.use(axios);
+// Vue.use(qs);
 
 Vue.component('login', login);
 Vue.component('color', color);
@@ -31,7 +32,8 @@ Vue.component('vts-footer', VTSfooter);
 
 
 // 将 axios 改写为 Vue 的原型属性,使在其它的组件中可以使用 axios
-Vue.prototype.$axios = axios
+Vue.prototype.$axios = axios;
+// Vue.prototype.$qs = qs;
 
 /* eslint-disable no-new */
 new Vue({
