@@ -34,7 +34,7 @@ export default new Router({
       component: createNewUser
     },
     {
-      path: '/route/ExistingUser/:newsId/:newsTitle',
+      path: '/route/ExistingUser',
       name: 'ExistingUser',
       component: ExistingUser
     },
@@ -42,6 +42,7 @@ export default new Router({
       path: '/Pleaselogin',
       name: 'Pleaselogin',
       component: Pleaselogin
-    }
+    },
+    { path: '/hi1', name: 'hi1', component: ExistingUser }
   ]
 })
