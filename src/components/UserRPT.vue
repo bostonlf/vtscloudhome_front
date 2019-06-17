@@ -1,5 +1,7 @@
 <template>
   <article>
+
+
     <div v-if="userRPTdata.length>0">
       <table>
         <thead>
@@ -14,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in userRPTdata"  v-bind:key="user.x_userid">
+          <tr v-for="user in searchData"  v-bind:key="user.x_userid">
             <td>
               <input
                 type="checkbox"
@@ -47,8 +49,7 @@
     </div>
     <div v-else>No records.</div>
     <hr>
-
-    {{selectedUser}}
+{{selectedUser}}
   </article>
 </template>
 
@@ -63,11 +64,11 @@ export default {
   data() {
     return {
       userRPTdata: [],
-      selectedUser: []
+      selectedUser: [],
     };
   },
   name: "UserRPT",
-  props: ["loginmsg"],
+  props: ["searchFilter"],
   methods: {
     getuserRPT: function(params) {
       this.$axios
@@ -141,6 +142,21 @@ export default {
   mounted() {
     //自动加载indexs方法
     this.getuserRPT();
-  }
+  },
+    computed: {
+    searchData: function() {
+      var search = this.searchFilter;
+
+      if (search) {
+        return this.userRPTdata.filter(function(product) {
+          return Object.keys(product).some(function(key) {
+            return String(product[key]).toLowerCase().indexOf(search) > -1
+          })
+        })
+      }
+
+      return this.userRPTdata;
+    }
+    }
 };
 </script>
