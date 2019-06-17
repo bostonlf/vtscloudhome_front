@@ -340,7 +340,7 @@ export default {
       console.log(this.formObj);
       console.log("赋值 Status 和 x_modified");
       this.$axios
-        .post("/im/API/createNewDoc", this.userform)
+        .post(this.APIroot+"/API/createNewDoc", this.userform)
         .then(response => {
           this.newuserdocid = response;
           this.$router.push({ name: "User" });

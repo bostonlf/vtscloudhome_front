@@ -17,6 +17,12 @@
 <router-link :to="{name:'ExistingUser',params:{username:'jspang'}}">ExistingUser</router-link>
 
     </p>
+    <p>
+
+
+    APIroot{{root}}
+
+    </p>
   </div>
 </template>
 
@@ -26,6 +32,11 @@ import UserRPT from '@/components/UserRPT'
 Vue.component('user-rpt', UserRPT);
 
 export default {
+    data() {
+    return {
+      root:this.APIroot
+    };
+  },
   name: "User",
   props: ["loginmsg"],
 };

@@ -1,39 +1,73 @@
 <template>
-   <header>
-    <a href="#/">homepage</a> | <div>CurrentUser is : {{currentUser}}</div> | 
-   <div v-bind:class="loginStyle"><a href="/route/login">login</a></div>
-   <div v-bind:class="logoutStyle"><a href="/route/logout">logout</a></div>
-   </header>
+  <header role="banner" aria-labelledby="ibm-pagetitle-h1">
+    <!--MENU_NAVIGATION_BEGIN-->
+    <div class="ibm-sitenav-menu-container">
+      <div class="ibm-sitenav-menu-name">
+        <a href="#/route/VTShomepage">V-TServices</a>
+      </div>
+      <div class="ibm-sitenav-menu-list">
+        <ul role="menubar">
+          <li role="presentation" class="ibm-highlight">
+            <a role="menuitem" href="#/route/VTShomepage">V-TServices</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" href="#/route/Person">Person</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" href="#/route/Request">Request</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" href="#/route/TaskProfile">Task profile</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" href="#/route/Task">Task</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" href="#/route/User">Adminstration</a>
+          </li>
+          <li role="presentation">
+            <a role="menuitem" href="#/route/User">User accounts</a>
+          </li>
+        </ul>
+      </div>
+
+<div>currentUser : @@{{currentUser}}@@</div>
+
+
+    </div>
+    <!--MENU_NAVIGATION_END-->
+    <!--LEADSPACE_BEGIN-->
+    <div
+      id="ibm-leadspace-head"
+      class="ibm-alternate"
+      v-bind:style="backgroundStyle">
+      <div id="ibm-leadspace-body" class="ibm-padding-top-r2 ibm-padding-bottom-r2">
+        <div class="ibm-columns ibm-alternate-background">
+          <div class="ibm-col-6-4 ibm-col-medium-1-1">
+            <h1 class="ibm-h1 ibm-medium ibm-padding-bottom-1">V-TServices</h1>
+            <h4 class="ibm-h4 ibm-padding-bottom-2">Administrator</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--LEADSPACE_END-->
+  </header>
 </template>
 
 <script>
-    export default {
-          data() {
-                return {
-                msg: "Welcome to Your Vue.js App",
-                mystle:"showlogin"
-                };
-            },
-        name: "VTSheader",
-        props:['loginmsg','currentUser','isLogin'],
-        computed:{
-        loginStyle: function () {
-        return this.isLogin?"hiddelogin":"showlogin"
-        },
-        logoutStyle: function () {
-        return this.isLogin?"showlogin":"hiddelogin"
-        }
-        }
-    }
+export default {
+  data() {
+    return {
+      backgroundStyle: {
+        backgroundImage:
+          "url(" + require("@/assets/leadspace-lightblue.jpg") + ")",
+        backgroundSize: "cover",
+        backgroundPosition: "right"
+      }
+    };
+  },props: ["currentUser"],
+};
 </script>
 
 <style>
-.showlogin {
-display: inline;
-color: red;
-}
-
-.hiddelogin {
-display: none;
-}
 </style>

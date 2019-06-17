@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import homepage from '@/components/homepage'
+import VTShomepage from '@/components/VTShomepage'
+import VTSbody from '@/components/VTSbody'
 import User from '@/components/User'
 import createNewUser from '@/components/createNewUser'
 import HelloWorld from '@/components/HelloWorld'
 import shoppingcart from '@/components/shoppingcart'
-import VTSbody from '@/components/VTSbody'
 import Pleaselogin from '@/components/Pleaselogin'
 import ExistingUser from '@/components/ExistingUser'
 
@@ -15,13 +16,18 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'homepage',
-      component: homepage
+      name: 'VTShomepage',
+      component: VTShomepage
     },
     {
-      path: '/mytest',
-      name: 'shoppingcart',
-      component: shoppingcart
+      path: '/route/VTShomepage',
+      name: 'VTShomepage',
+      component: VTShomepage
+    },
+    {
+      path: '/route/Person',
+      name: 'Person',
+      component: VTShomepage
     },
     {
       path: '/route/User',
