@@ -23,7 +23,12 @@
             <a role="menuitem" href="#/route/Task">Task</a>
           </li>
           <li role="presentation">
-            <a role="menuitem" href="#/route/User">Adminstration</a>
+            <a role="menuitem" href="#/route/Adminstration">Adminstration</a>
+<ul>
+    <li v-for="item in SubItemList">
+        <router-link :to="{name:item.routerName,params:{linkText:item.linkText}}">{{ item.linkText }}</router-link>
+    </li>
+</ul>
           </li>
           <li role="presentation">
             <a role="menuitem" href="#/route/User">User accounts</a>
@@ -31,7 +36,7 @@
         </ul>
       </div>
 
-<div>currentUser : @@{{currentUser}}@@</div>
+<div>currentUser : {{currentUser}}</div>
 
 
     </div>
@@ -63,7 +68,20 @@ export default {
           "url(" + require("@/assets/leadspace-lightblue.jpg") + ")",
         backgroundSize: "cover",
         backgroundPosition: "right"
-      }
+      },
+      SubItemList: [
+        {"routerName":"AdminCompany","linkText":"V-TSerivces company"},
+        {"routerName":"AdminIBMcompany","linkText":"IBM company"},
+        {"routerName":"AdminSupplierCompany","linkText":"Supplier company name"},
+        {"routerName":"AdminDepartment","linkText":"Department name"},
+        {"routerName":"AdminPrimaryLocation","linkText":"V-TServices primary location"},
+        {"routerName":"AdminAdditionallocation","linkText":"V-TServices additional location"},
+        {"routerName":"AdminProfession","linkText":"Profession"},
+        {"routerName":"AdminCustomerInvolved","linkText":"Customer data are involved"},
+        {"routerName":"AdminTypeSystem","linkText":"Type of system administrator right"},
+        {"routerName":"AdminImports","linkText":"Imports"},
+        {"routerName":"AdminExports","linkText":"Exports"}
+        ]
     };
   },props: ["currentUser"],
 };

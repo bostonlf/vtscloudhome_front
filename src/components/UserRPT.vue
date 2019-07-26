@@ -1,9 +1,9 @@
 <template>
-  <article>
-
+<div id="yesRecord_wrapper" class="dataTables_wrapper no-footer">
 
     <div v-if="userRPTdata.length>0">
-      <table>
+      <table border="0" cellpadding="0" cellspacing="0" class="ibm-data-table display dataTable no-footer dtr-inline ibm-widget-processed" data-widget="datatable" data-searching="true" role="grid">
+        <caption><em>User accounts list</em></caption> 
         <thead>
           <tr>
             <th></th>
@@ -35,22 +35,16 @@
             <td>{{ user.Status }}</td>
           </tr>
         </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="3">
-              <button @click="SelectAll">Select all</button>
-            </td>
-            <td colspan="3">
-              <button @click="DeleteSelected">Delect selected user</button>
-            </td>
-          </tr>
-        </tfoot>
       </table>
+
+<p class="ibm-btn-row" id="searchButtons" style="display: block;margin-top: 20px;">
+<button @click="SelectAll" class="ibm-btn-sec">Select all</button><button @click="DeleteSelected" class="ibm-btn-sec">Delect selected user</button>
+</p>
     </div>
     <div v-else>No records.</div>
     <hr>
 {{selectedUser}}
-  </article>
+  </div>
 </template>
 
 <script>

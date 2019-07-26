@@ -1,11 +1,16 @@
 <template>
-  <article>
-    <h3>createNewUser</h3>
+<form class="ibm-column-form" @submit.prevent="createNewUser">
+<div  class="ibm-columns">
+  <div  class="ibm-col-1-1">
+    <div class="ibm-show-hide ibm-alternate ibm-widget-processed">
+      <div class="ibm-container-body">
+        <div  class="ibm-columns">
+          <div  class="ibm-col-1-1">
+            <p class="ibm-h4">createNewUser</p>
+            
+<p>The fields indicated with an asterisk (*) are required to complete this transaction; other fields are optional. If you do not want to provide us with the required information, please use the back button on your browser to return to the previous page.</p>
 
-    <form @submit.prevent="createNewUser">
-      <div class="ibm-container">
-        <p>The fields indicated with an asterisk (*) are required to complete this transaction; other fields are optional. If you do not want to provide us with the required information, please use the back button on your browser to return to the previous page.</p>
-      </div>
+<div style="display:none">
       <input type="hidden" v-model="userform.boname" name="boname" id="boname" value="XUSERPROFILE">
       <input type="hidden" v-model="userform.nexturl" name="nexturl" id="nexturl" value="User">
       <input type="hidden" v-model="userform.x_docid" name="x_docid" id="x_docid" value>
@@ -25,48 +30,48 @@
         id="basePath"
         value="/tools/wse/runtime/hspx/dev/protect"
       >
-      <div style="display:none">
-        <p>
-          <label for="x_focalpoint">Focal Point of countries:</label>
-          <span>
-            <input v-model="userform.x_focalpoint" name="x_focalpoint" id="x_focalpoint" value>
-          </span>
-        </p>
-        <p>
-          <label for="x_notification">Email notifications:</label>
-          <span>
             <input
-              v-model="userform.x_notification"
-              name="x_notification"
-              id="x_notification"
-              value
-            >
-          </span>
+        type="hidden"
+        v-model="userform.x_returnMode"
+        name="x_returnMode"
+        id="x_returnMode"
+        value="xinclude"
+      >
+      <input
+        type="hidden"
+        v-model="userform.x_allFilesName"
+        name="x_allFilesName"
+        id="x_allFilesName"
+        value
+      >
+      <input
+        type="hidden"
+        v-model="userform.fileCheck"
+        name="fileCheck"
+        id="fileCheck"
+        value="true"
+      >
+</div>
+
+        <p>
+          <label for="x_focalpoint" class="ibm-column-field-label">Focal Point of countries:</label>
+            <input type="text" v-model="userform.x_focalpoint" name="input.x_focalpoint" id="x_focalpoint" maxlength="200"  size="30" value>
         </p>
-      </div>
-      <p>
-        <label for="x_userid">
-          User ID:
-          <span class="ibm-required">*</span>
-        </label>
-        <span>
-          <input
-            v-model="userform.x_userid"
-            name="x_userid"
-            size="40"
-            required="true"
-            id="x_userid"
-            value
-          >
-        </span>
-      </p>
-      <p>
-        <label for="role">
-          Role:
-          <span class="ibm-required">*</span>
-        </label>
-        <span class="ibm-input-group">
-          <select
+
+        <p>
+          <label for="x_notification" class="ibm-column-field-label">Email notifications:</label>
+            <input type="text" v-model="userform.x_notification" name="input.x_notification" id="x_notification" maxlength="200"  size="30" value>
+        </p>
+
+        <p>
+          <label for="x_userid" class="ibm-column-field-label">User ID:<span class="ibm-required">*</span></label>
+            <input type="text" v-model="userform.x_userid" name="input.x_userid" id="x_userid" maxlength="200"  size="30" value>
+        </p>
+
+        <p>
+          <label for="role" class="ibm-column-field-label">Role:<span class="ibm-required">*</span></label>
+            <span>
+             <select
             v-model="userform.role"
             name="role"
             id="role"
@@ -97,12 +102,11 @@
             <option value="Administrator">Administrator</option>
             <option value="ATT_FocalPoint">ATT_FocalPoint</option>
           </select>
-        </span>
-      </p>
-      <div id="focalpoint" style="display:none">
+          </span>
+        </p>
+
         <p>
-          <label for="x_country">Focal Point of countries:</label>
-          <span class="ibm-input-group">
+          <label for="x_country" class="ibm-column-field-label">Focal Point of countries:</label>
             <select
               v-model="userform.x_country"
               name="x_country"
@@ -120,164 +124,105 @@
               <option value="Hungary">Hungary</option>
               <option value="Other Countries">Other Countries</option>
             </select>
-          </span>
         </p>
-      </div>
-      <p>
-        <label for="x_emailnotification">
-          Email notifications:
-          <span class="ibm-required">*</span>
-        </label>
-        <span class="ibm-input-group">
-          <input type="hidden" name="$$x_emailnotification" value>
-          <input
-            type="radio"
-            v-model="userform.x_emailnotification"
-            name="x_emailnotification"
-            id="x_emailnotification_1"
-            class="ibm-styled"
-            value="YES"
-          >
-          <label for="x_emailnotification_1">YES</label>
-          <br>
-          <input
-            type="radio"
-            v-model="userform.x_emailnotification"
-            name="x_emailnotification"
-            id="x_emailnotification_2"
-            class="ibm-styled"
-            value="NO"
-          >
-          <label for="x_emailnotification_2">NO</label>
-          <br>
-        </span>
-      </p>
-      <p>
-        <label for="x_email">
-          Email:
-          <span class="ibm-required">*</span>
-        </label>
-        <span>
-          <input
-            v-model="userform.x_email"
-            name="x_email"
-            size="40"
-            required="true"
-            id="x_email"
-            value
-          >
-        </span>
-      </p>
-      <p>
-        <label for="x_firstname">
-          First Name:
-          <span class="ibm-required">*</span>
-        </label>
-        <span>
-          <input
-            v-model="userform.x_firstname"
-            name="x_firstname"
-            size="40"
-            required="true"
-            id="x_firstname"
-            value
-          >
-        </span>
-      </p>
-      <p>
-        <label for="x_lastname">
-          Last Name:
-          <span class="ibm-required">*</span>
-        </label>
-        <span>
-          <input
-            v-model="userform.x_lastname"
-            name="x_lastname"
-            size="40"
-            required="true"
-            id="x_lastname"
-            value
-          >
-        </span>
-      </p>
-      <p>
-        <label for="x_phone">Phone number:</label>
-        <span>
-          <input v-model="userform.x_phone" name="x_phone" size="40" id="x_phone" value>
-        </span>
-      </p>
-      <p>
-        <label for="x_mobile">Mobile phone number:</label>
-        <span>
-          <input v-model="userform.x_mobile" name="x_mobile" size="40" id="x_mobile" value>
-        </span>
-      </p>
-      <p>
-        <label for="x_fax">Fax:</label>
-        <span>
-          <input v-model="userform.x_fax" name="x_fax" size="40" id="x_fax" value>
-        </span>
-      </p>
-      <p>
-        <label for="x_company">Company:</label>
-        <span>
-          <input v-model="userform.x_company" name="x_company" size="40" id="x_company" value>
-        </span>
-      </p>
-      <p>
-        <label for="x_department">Department:</label>
-        <span>
-          <input
-            v-model="userform.x_department"
-            name="x_department"
-            size="40"
-            id="x_department"
-            value
-          >
-        </span>
-      </p>
-      <p>
-        <label for="x_function">Function:</label>
-        <span>
-          <input v-model="userform.x_function" name="x_function" size="40" id="x_function" value>
-        </span>
-      </p>
-      <p>
-        <label for="Status">Status:</label>
-        <input type="hidden" v-model="userform.Status" name="Status" id="Status" value="Active">
-        <span id="Status-output">Active&nbsp;</span>
-      </p>
-      <input
-        type="hidden"
-        v-model="userform.x_returnMode"
-        name="x_returnMode"
-        id="x_returnMode"
-        value="xinclude"
-      >
-      <input
-        type="hidden"
-        v-model="userform.x_allFilesName"
-        name="x_allFilesName"
-        id="x_allFilesName"
-        value
-      >
-      <input
-        type="hidden"
-        v-model="userform.fileCheck"
-        name="fileCheck"
-        id="fileCheck"
-        value="true"
-      >
-      <p>
-        <label for="x_comment">Comments:</label>
-        <span>
-          <textarea v-model="userform.x_comment" name="x_comment" id="x_comment" rows="6" cols="38"></textarea>
-        </span>
-      </p>
 
-      <input type="submit" @click="updateData()" value="提交">
-    </form>
-  </article>
+ <p>
+    <label for="x_emailnotification" class="ibm-column-field-label">Email notifications:</label>
+    <span>
+            <input type="hidden" name="$$x_emailnotification" value>
+            <input
+              type="radio"
+              v-model="userform.x_emailnotification"
+              name="x_emailnotification"
+              id="x_emailnotification_1"
+              class="ibm-styled"
+              value="YES"
+            >
+            <label for="x_emailnotification_1">YES</label>
+            <br>
+            <input
+              type="radio"
+              v-model="userform.x_emailnotification"
+              name="x_emailnotification"
+              id="x_emailnotification_2"
+              class="ibm-styled"
+              value="NO"
+            >
+            <label for="x_emailnotification_2">NO</label>
+            <br>
+          </span>
+</p>
+<p>
+    <label for="x_email" class="ibm-column-field-label">Email:<span class="ibm-required">*</span></label>
+    <input type="text" v-model="userform.x_email" name="input.x_email" id="x_email" maxlength="200" size="30"
+        value>
+</p>
+<p>
+    <label for="x_firstname" class="ibm-column-field-label">First Name:<span class="ibm-required">*</span></label>
+    <input type="text" v-model="userform.x_firstname" name="input.x_firstname" id="x_firstname" maxlength="200" size="30"
+        value>
+</p>
+<p>
+    <label for="x_lastname" class="ibm-column-field-label">Last Name:<span class="ibm-required">*</span></label>
+    <input type="text" v-model="userform.x_lastname" name="input.x_lastname" id="x_lastname" maxlength="200" size="30"
+        value>
+</p>
+<p>
+    <label for="x_phone" class="ibm-column-field-label">Phone number:</label>
+    <input type="text" v-model="userform.x_phone" name="input.x_phone" id="x_phone" maxlength="200" size="30"
+        value>
+</p>
+<p>
+    <label for="x_mobile" class="ibm-column-field-label">Mobile phone number:</label>
+    <input type="text" v-model="userform.x_mobile" name="input.x_mobile" id="x_mobile" maxlength="200" size="30"
+        value>
+</p>
+<p>
+    <label for="x_fax" class="ibm-column-field-label">Fax:</label>
+    <input type="text" v-model="userform.x_fax" name="input.x_fax" id="x_fax" maxlength="200" size="30"
+        value>
+</p>
+<p>
+    <label for="x_company" class="ibm-column-field-label">Company:</label>
+    <input type="text" v-model="userform.x_company" name="input.x_company" id="x_company" maxlength="200" size="30"
+        value>
+</p>
+<p>
+    <label for="x_department" class="ibm-column-field-label">Department:</label>
+    <input type="text" v-model="userform.x_department" name="input.x_department" id="x_department" maxlength="200" size="30"
+        value>
+</p>
+<p>
+    <label for="x_function" class="ibm-column-field-label">Function:</label>
+    <input type="text" v-model="userform.x_function" name="input.x_function" id="x_function" maxlength="200" size="30"
+        value>
+</p>
+
+<p>
+  <label for="Status" class="ibm-column-field-label">Status:</label>
+  <input type="hidden" v-model="userform.Status" name="Status" id="Status" value="Active">
+  <span id="Status-output">Active&nbsp;</span>
+</p>
+
+<p>
+<label for="x_comment" class="ibm-column-field-label">Comments:</label>
+  <span>
+    <textarea v-model="userform.x_comment" name="x_comment" id="x_comment" rows="6" cols="38"></textarea>
+  </span>
+</p>
+
+<p class="ibm-btn-row">
+<input type="submit" @click="updateData()" value="提交" class="ibm-btn-pri ibm-btn-blue-50">
+</p>
+
+      
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
 </template>
 
 <script>

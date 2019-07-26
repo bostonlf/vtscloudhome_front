@@ -1,11 +1,17 @@
 <template>
-  <div id="app">
-    <vts-header v-bind:currentUser="currentUser"  v-bind:isLogin="isLogin" ></vts-header>
-    <div id="ibm-content-wrapper">
+<div id="app">
+  <vts-header v-bind:currentUser="currentUser"  v-bind:isLogin="isLogin" ></vts-header>
+  <div id="ibm-content-wrapper">
+  <div id="ibm-pcon">
+  <div id="ibm-content">
+  <div id="ibm-content-body">
     <router-view/>
-    </div>
     <vts-footer></vts-footer>
   </div>
+  </div>
+  </div>
+  </div>
+</div>
 </template>
 
 <script>

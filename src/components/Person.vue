@@ -1,14 +1,13 @@
 <template>
   <div>
     <p>
-      User accounts
+      Person
       <br/>
-    <a href="#/route/createNewUser">Create a new User account</a>
+    <a href="#/route/PersonDetail">Create a new Person</a>
     </p>
     <p><div class="ibm-rule ibm-alternate-1"></div></p>
     <p>
-      To find users, please input user's information then click the Search button - fuzzy search scope including User ID, Role, Email, First name, Last name.
-      Please input user's information
+      To find persons, please input person's information then click the Search button - fuzzy search scope including Resource key, Status, Resource type, Resource first name, Resource last name, Department name and V-TServices responsible manager.
       <br>
       <div class="dataTables_filter">
       <input type="text" v-model="searchFilter">
