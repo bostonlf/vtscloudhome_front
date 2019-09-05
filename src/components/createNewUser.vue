@@ -212,7 +212,7 @@
 </p>
 
 <p class="ibm-btn-row">
-<input type="submit" @click="updateData()" value="提交" class="ibm-btn-pri ibm-btn-blue-50">
+<input type="submit" @click="createNewUser()" value="提交" class="ibm-btn-pri ibm-btn-blue-50">
 </p>
 
       
@@ -285,7 +285,7 @@ export default {
       console.log(this.formObj);
       console.log("赋值 Status 和 x_modified");
       this.$axios
-        .post(this.APIroot+"/API/createNewDoc", this.userform)
+        .post(this.APIroot+"/API/createNewUser", this.userform)
         .then(response => {
           this.newuserdocid = response;
           this.$router.push({ name: "User" });
@@ -297,6 +297,17 @@ export default {
     },
     updateData() {
       this.userform.x_modified = new Date();
+      console.log("赋值 Status 和 x_modified");
+      this.$axios
+      .put(this.APIroot+"/API/UpdateUserDoc", this.userform)
+      .then(response => {
+      this.newuserdocid = response;
+      this.$router.push({ name: "User" });
+      })
+      .catch(function(error) {
+      // 请求失败处理
+      console.log(error);
+      });
     }
   },
   created() {

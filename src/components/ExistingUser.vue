@@ -274,7 +274,7 @@
         </span>
       </p>
 
-      <input type="submit" @click="updateData()" value="提交">
+      <input type="submit" @click="UpdateUser()" value="提交">
     </form>
 
 <br>
@@ -319,7 +319,8 @@ export default {
         x_returnMode: "",
         x_allFilesName: "",
         fileCheck: "",
-        x_comment: ""
+        x_comment: "",
+        x_modified:new Date()
       },
       newuserdocid: "info",
       userdocid:this.$route.params.userdocid,
@@ -351,12 +352,14 @@ export default {
 
     },
     updateData() {
-      this.userform.x_modified = new Date();
+      // this.userform.x_modified = new Date();
     },
     UpdateUser(e) {
       console.log(e);
-      console.log(this.formObj);
-      console.log("UpdateUser");
+      // this.userform.x_modified = new Date();
+      console.log("---------------------UpdateUser------------------");
+      console.log(this.userform);
+      console.log("---------------------UpdateUser------------------");
       this.$axios
         .put(this.APIroot+"/API/UpdateUserDoc", this.userform)
         .then(response => {

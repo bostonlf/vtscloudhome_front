@@ -36,7 +36,7 @@
         </ul>
       </div>
 
-<div>currentUser : {{currentUser}}</div>
+<div>currentUser : {{currentUser}}@@@{{currentUserDocument}}</div>
 
 
     </div>
@@ -63,6 +63,7 @@
 export default {
   data() {
     return {
+      currentUserDocument:this.currentUserDocument,
       backgroundStyle: {
         backgroundImage:
           "url(" + require("@/assets/leadspace-lightblue.jpg") + ")",
